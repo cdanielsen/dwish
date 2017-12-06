@@ -1,0 +1,11 @@
+{
+  "name": "dwish",
+  "version": "0.0.1",
+  "description": "A server to manage automated dishwasher notifications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo Maybe Later"
+  },
+  "author": "Christian Danielsen, Alyssa Horrocks, Jeff Scott",
+  "license": "MIT"
+}
