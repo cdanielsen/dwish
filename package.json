@@ -4,8 +4,18 @@
   "description": "A server to manage automated dishwasher notifications",
   "main": "index.js",
   "scripts": {
-    "test": "echo Maybe Later"
+    "test": "echo Maybe Later",
+    "start": "nodemon index.js"
   },
   "author": "Christian Danielsen, Alyssa Horrocks, Jeff Scott",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.16.2",
+    "firebase": "4.7.0",
+    "request": "2.83.0",
+    "request-promise": "4.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "1.12.5"
+  }
 }
