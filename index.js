@@ -1,6 +1,7 @@
 const express = require('express')
 const rp = require('request-promise')
 const pg = require('pg');
+const {join} = require('path')
 require('dotenv').config()
 const {SLACK_HOOK} = require('./config')
 const { scheduleAlert, getData, postData } = require('./events')
@@ -13,9 +14,14 @@ const PORT = process.env.PORT || 3001
 // app.use(express.static('path_to_assets_folder'))
 
 // Top level route
+const assets = join(__dirname, 'client/build')
+
+// Serve static files from ./build
+app.use(express.static(assets))
 
 app.get('/', (request, response) => {
-  response.send('React Placeholder')
+  response.sendFile(join(__dirname, '/index.html'))
+
 })
 
 app.get('/api/events', async (request, response) => {
