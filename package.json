@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo Maybe Later",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "Christian Danielsen, Alyssa Horrocks, Jeff Scott",
   "license": "MIT",

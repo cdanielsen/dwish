@@ -26,6 +26,15 @@ app.get('/', (request, response) => {
 
 app.get('/api/events', async (request, response) => {
   try {
+    const events = await getData(MONGO_API_KEY);
+    response.send(events);
+  } catch (err) {
+    console.error(err);
+  }
+})
+
+app.post('/api/event', async (request, response) => {
+  try {
     const slackResponse = await rp({
       uri: SLACK_HOOK,
       method: 'POST',
