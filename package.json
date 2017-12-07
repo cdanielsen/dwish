@@ -10,8 +10,9 @@
   "author": "Christian Danielsen, Alyssa Horrocks, Jeff Scott",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "4.0.0",
     "express": "4.16.2",
-    "firebase": "4.7.0",
+    "pg": "7.4.0",
     "request": "2.83.0",
     "request-promise": "4.2.2"
   },
