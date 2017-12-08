@@ -23,6 +23,14 @@ function getData (apiKey) {
   });
 }
 
+function getDataById (apiKey, id) {
+  return rp({
+    method: 'GET',
+    uri: `https://api.mlab.com/api/1/databases/dwishdb/collections/DishEvents/${id}?apiKey=${apiKey}`,
+    json: true
+  });
+}
+
 function postData (apiKey, eventType) {
   return rp({
     method: 'POST',
@@ -36,4 +44,19 @@ function postData (apiKey, eventType) {
     json: true
   });
 }
-module.exports = { scheduleAlert, getData, postData }
+
+function putData(apiKey, dishEvent) {
+  const id = dishEvent._id.$oid;
+
+  return rp({
+    method: 'PUT',
+    uri: `https://api.mlab.com/api/1/databases/dwishdb/collections/DishEvents/${id}?apiKey=${apiKey}`,
+    body: {
+      ...dishEvent,
+      timeClaimed: moment().format(),
+      claimed: true
+    },
+    json: true
+  });
+}
+module.exports = { scheduleAlert, getData, postData, putData, getDataById }

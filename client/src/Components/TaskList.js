@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const rp = require('request-promise')
+import {getEvents, updateEvent} from '../serverApi'
 
 class TaskList extends Component {
   state = {
@@ -7,11 +7,21 @@ class TaskList extends Component {
   }
 
   componentDidMount () {
-    console.log('yasss')
-    rp({
-      uri: `http://localhost:3001/api/events`,
-      method: 'GET',
-      json: true
+    getEvents().then(result => {
+      this.setState({
+        events: result
+      })
+    })
+  }
+  unclaimedEventsExist () {
+    const output = this.state.events.some(event => event.claimed === false);
+    return output    
+  }
+
+  claimEventHandler (dishEvent) {
+    updateEvent(dishEvent._id.$oid)
+      .then(msg => {
+      return getEvents()
     }).then(result => {
       this.setState({
         events: result
@@ -20,13 +30,23 @@ class TaskList extends Component {
   }
 
   render() {
+    let display;
+
+    if(this.unclaimedEventsExist()) {
+      display = (<div>
+        {
+          this.state.events.map((dishEvent, idx) => {
+            return !dishEvent.claimed ? <div key={idx}><span>{dishEvent.eventType}</span><button onClick={() => this.claimEventHandler(dishEvent)}>CLAIM IT!</button></div> : null
+          })
+        }
+      </div>)
+    } else {
+      display = (<h1>NOTHING TO DO</h1>)
+    }
+
     return (
       <div>
-        <ul>
-          {this.state.events.map(event => {
-            return <li>{event.timeCreated}</li>
-          })}
-        </ul>
+        {display}
       </div>
     );
   }
