@@ -15,7 +15,7 @@ class TaskList extends Component {
   }
   unclaimedEventsExist () {
     const output = this.state.events.some(event => event.claimed === false);
-    return output    
+    return output
   }
 
   claimEventHandler (dishEvent) {
@@ -36,17 +36,42 @@ class TaskList extends Component {
       display = (<div>
         {
           this.state.events.map((dishEvent, idx) => {
-            return !dishEvent.claimed ? <div key={idx}><span>{dishEvent.eventType}</span><button onClick={() => this.claimEventHandler(dishEvent)}>CLAIM IT!</button></div> : null
+            return !dishEvent.claimed ? <div className="event" key={idx}><button className="button is-info is-large is-focused" onClick={() => this.claimEventHandler(dishEvent)}>Unload!</button></div> : null
           })
         }
       </div>)
     } else {
-      display = (<h1>NOTHING TO DO</h1>)
+      display = (<div className="no-tasks"><img src="dishwasher.png" /><h4>(Load the left diswasher!)</h4></div>)
     }
 
     return (
-      <div>
-        {display}
+      <div className="container">
+        <div className="columns">
+          <div className="column">
+            <h2>tasks</h2>
+            {display}
+          </div>
+          <div className="column">
+            <h2>leaders</h2>
+              <div className="dish-washer">
+                <img src="josh.png" className="image is-96x96" />
+                <h4>Josh Jarmain</h4>
+                <h4><strong>50 pts</strong></h4>
+              </div>
+
+              <div className="dish-washer">
+                <img src="slick.png" className="image is-96x96" />
+                <h4>David Slick</h4>
+                <h4><strong>25 pts</strong></h4>
+              </div>
+
+              <div className="dish-washer">
+                <img src="katelyn.png" className="image is-96x96" />
+                <h4>Katelynn W</h4>
+                <h4><strong>0 pts</strong></h4>
+              </div>
+          </div>
+        </div>
       </div>
     );
   }

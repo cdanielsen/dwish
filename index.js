@@ -50,13 +50,14 @@ app.post('/api/event', async (request, response) => {
       json: true
     });
     scheduleAlert({
-      time: 5000
+      msg: 'A dishwasher is ready to be emptied.',
+      time: 15000
     })
     response.send("Message sent!");
   } catch (err) {
     console.error(err);
     response.send("Message failed.");
-  }  
+  }
 
   try {
     postData(MONGO_API_KEY, 'DISHWASHER_STARTED');
@@ -92,5 +93,5 @@ app.listen(PORT, (err) => {
   if (err) {
     return console.log('Something bad happened', err)
   }
-  console.log(`Huzzah! Server is listening at http://localhost:${PORT}`)
+  console.log(`Huzzah! Express Server is listening at http://localhost:${PORT}`)
 })
